@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<!-- Neutral title on purpose: the tab, history and any screenshot filename must not name the project (stealth spec 09). -->
+<title>Wireframe A</title>
+<!-- Same outbound block the old Node server sent as a header: no fetches, images, fonts or form posts
+     can leave this page. python http.server sends no security headers, so it lives here instead. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'none'; font-src 'none'; base-uri 'none'; form-action 'none'">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Mock banner is required by spec 05 on every internal surface. -->
+<div class="banner" role="note">Private wireframe. Mock sign-in, mock follow check, illustrative numbers. Nothing leaves this computer.</div>
+
+<div class="layout">
+  <main id="page" aria-labelledby="headline">
+    <p class="screen-id" id="screen-id">S01 Discovery</p>
+
+    <!-- The nest IS the progress display (onboarding doc: minimal text, nest communicates progress).
+         Wireframe uses grey bands that appear at milestones, not one sprite per stick. Real art is Aydan's call. -->
+    <figure class="nest" aria-hidden="true">
+      <svg viewBox="0 0 320 180" id="nest-svg">
+        <rect x="1" y="1" width="318" height="178" class="frame"/>
+        <line x1="1" y1="1" x2="319" y2="179" class="cross"/>
+        <line x1="319" y1="1" x2="1" y2="179" class="cross"/>
+        <g id="nest-bands">
+          <path class="band" data-at="0"   d="M70 150 Q160 175 250 150 L250 158 Q160 182 70 158 Z"/>
+          <path class="band" data-at="20"  d="M60 138 Q160 168 260 138 L256 150 Q160 176 64 150 Z"/>
+          <path class="band" data-at="40"  d="M54 124 Q160 158 266 124 L262 138 Q160 168 58 138 Z"/>
+          <path class="band" data-at="60"  d="M50 110 Q160 146 270 110 L266 124 Q160 158 54 124 Z"/>
+          <path class="band" data-at="80"  d="M48 96 Q160 134 272 96 L270 110 Q160 146 50 110 Z"/>
+          <path class="band rim" data-at="100" d="M46 86 Q160 122 274 86 Q160 104 46 86 Z"/>
+        </g>
+        <!-- Drop marker shows where the newly added stick animates in on S02. -->
+        <rect id="stick-drop" x="150" y="60" width="26" height="6" rx="2" class="stick" transform="rotate(-12 163 63)"/>
+        <text x="10" y="20" class="svg-label">NEST ART PLACEHOLDER</text>
+        <text x="10" y="34" class="svg-label" id="nest-stage-label">milestone 0 of 5</text>
+      </svg>
+      <figcaption class="note">Nest fills visually at milestones (here every 20%). Creature and project details stay hidden in prelaunch.</figcaption>
+    </figure>
+
+    <!-- Text equivalent of the nest for screen readers (spec 05: DOM equivalent for any visual state). -->
+    <p class="progress-text" id="progress-text" aria-live="polite"></p>
+    <div class="bar" aria-hidden="true"><div class="bar-fill" id="bar-fill"></div></div>
+    <p class="note">Count and target are illustrative (843 / 2,000 in the onboarding doc). Threshold still to decide.</p>
+
+    <h1 id="headline">Build the nest. Find out what belongs inside.</h1>
+    <p class="note">Candidate copy from PRELAUNCH-ONBOARDING.md. Final wording open.</p>
+
+    <!-- Invitation attribution notice. Only shown when the URL carries ?invite=, per J01 step 1. -->
+    <p class="invite" id="invite" hidden>Invited by <strong id="invite-code"></strong>. Recorded once you activate.</p>
+
+    <!-- Live region announces each step change for screen readers. -->
+    <section class="card" id="card" aria-live="polite" tabindex="-1"></section>
+  </main>
+
+  <!-- Reviewer panel. Not part of the product. Lets Aydan and Caelan jump to every alternate state in spec 05. -->
+  <aside class="review" aria-label="Reviewer controls">
+    <h2>Reviewer panel</h2>
+    <p class="hint">Not product UI. Mock code is <code>WIRE</code>.</p>
+
+    <fieldset>
+      <legend>Jump to state</legend>
+      <div id="jump" class="jump"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mock X results</legend>
+      <label>Account
+        <select id="mock-account">
+          <option value="new">New account</option>
+          <option value="returning">Returning, already has a stick</option>
+        </select>
+      </label>
+      <label>Follow check
+        <select id="mock-follow">
+          <option value="ok">Follows</option>
+          <option value="missing">Not following yet</option>
+          <option value="pending">Check pending</option>
+          <option value="unavailable">Check unavailable</option>
+        </select>
+      </label>
+      <label>Nest phase
+        <select id="mock-phase">
+          <option value="open">Collecting sticks</option>
+          <option value="complete">Already complete (late signup)</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Community count</legend>
+      <label>Sticks <output id="count-out"></output>
+        <input type="range" id="count" min="0" max="2000" step="1" value="843">
+      </label>
+      <button type="button" id="other-tab">Simulate completion in another tab</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>View</legend>
+      <label class="row"><input type="checkbox" id="notes" checked> Show wireframe notes</label>
+      <button type="button" id="reset">Reset flow</button>
+    </fieldset>
+  </aside>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

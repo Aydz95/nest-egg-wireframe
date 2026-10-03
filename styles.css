@@ -1,0 +1,79 @@
+/* Wireframe styling: deliberately greyscale and system fonts so nobody mistakes it for
+   approved visual design. Palette and type are locked in VISUAL-IDENTITY.md and get applied
+   only after Aydan picks a direction. No web fonts load (CSP blocks them anyway). */
+:root {
+  --ink: #1d1d1d;
+  --mute: #6b6b6b;
+  --line: #9a9a9a;
+  --fill: #d9d9d9;
+  --paper: #f6f6f4;
+  --card: #ffffff;
+  --note: #6a5acd;      /* annotation colour, purple so notes never look like product copy */
+  --error: #a3261b;
+  --focus: #1a5fd0;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); line-height: 1.45; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.banner { background: var(--ink); color: #fff; font-size: 12px; padding: 6px 16px; text-align: center; }
+
+/* Mobile first: single column. Reviewer panel stacks under the page. */
+.layout { display: grid; gap: 16px; padding: 16px; max-width: 1100px; margin: 0 auto; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; } }
+
+main { background: var(--card); border: 2px solid var(--ink); padding: 16px; max-width: 560px; width: 100%; justify-self: center; }
+.screen-id { margin: 0 0 8px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+
+.nest { margin: 0; }
+.nest svg { width: 100%; height: auto; display: block; }
+.frame { fill: var(--paper); stroke: var(--line); stroke-dasharray: 4 3; }
+.cross { stroke: #e3e3e3; }
+.band { fill: var(--fill); stroke: var(--ink); stroke-width: 1.5; opacity: .12; transition: opacity .4s; }
+.band.on { opacity: 1; }
+.stick { fill: var(--ink); opacity: 0; }
+.stick.drop { animation: drop .7s ease-in forwards; }
+@keyframes drop { from { opacity: 1; transform: translateY(-50px) rotate(-12deg); } to { opacity: 1; transform: translateY(40px) rotate(-12deg); } }
+.svg-label { font: 10px ui-monospace, monospace; fill: var(--mute); }
+@media (prefers-reduced-motion: reduce) { .band { transition: none; } .stick.drop { animation: none; opacity: 1; transform: translateY(40px) rotate(-12deg); } }
+
+.progress-text { margin: 12px 0 4px; font-weight: 700; }
+.bar { height: 10px; border: 1.5px solid var(--ink); background: var(--paper); }
+.bar-fill { height: 100%; background: var(--ink); width: 0; }
+
+h1 { font-size: 22px; line-height: 1.2; margin: 16px 0 4px; }
+.invite { border: 1.5px dashed var(--line); padding: 8px; font-size: 14px; }
+
+.card { margin-top: 16px; border-top: 2px solid var(--ink); padding-top: 16px; }
+.card h2 { font-size: 17px; margin: 0 0 8px; }
+.card p { margin: 0 0 12px; }
+.card .msg { padding: 8px 10px; border-left: 4px solid var(--ink); background: var(--paper); }
+.card .msg.error { border-color: var(--error); color: var(--error); }
+
+label { display: block; font-size: 14px; margin-bottom: 10px; }
+input[type=text], select { display: block; width: 100%; font: inherit; padding: 10px; border: 2px solid var(--ink); background: #fff; margin-top: 4px; }
+input[type=text][aria-invalid=true] { border-color: var(--error); }
+input[type=range] { width: 100%; }
+.row { display: flex; gap: 8px; align-items: center; }
+
+button, .btn { font: inherit; font-weight: 700; padding: 10px 14px; border: 2px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; min-height: 44px; }
+button.secondary, .btn.secondary { background: #fff; color: var(--ink); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.actions > * { flex: 1 1 160px; }
+
+.note { color: var(--note); font-size: 12px; margin: 4px 0 0; }
+body.hide-notes .note { display: none; }
+
+.review { background: #fff; border: 2px dashed var(--line); padding: 16px; font-size: 13px; }
+.review h2 { font-size: 14px; margin: 0 0 4px; text-transform: uppercase; letter-spacing: .06em; }
+.review .hint { color: var(--mute); margin: 0 0 12px; }
+.review fieldset { border: 1px solid var(--fill); margin: 0 0 12px; padding: 8px 10px; }
+.review legend { font-weight: 700; padding: 0 4px; }
+.review button { width: 100%; margin-top: 6px; font-size: 13px; min-height: 36px; padding: 6px 10px; }
+.jump { display: grid; gap: 4px; }
+.jump button { background: #fff; color: var(--ink); text-align: left; font-weight: 400; margin: 0; }
+.jump button[aria-current=step] { background: var(--ink); color: #fff; }
+.jump .group { font-size: 11px; color: var(--mute); margin-top: 6px; }
