@@ -39,6 +39,17 @@ main { background: var(--card); border: 2px solid var(--ink); padding: 16px; max
 .svg-label { font: 10px ui-monospace, monospace; fill: var(--mute); }
 @media (prefers-reduced-motion: reduce) { .band { transition: none; } .stick.drop { animation: none; opacity: 1; transform: translateY(40px) rotate(-12deg); } }
 
+/* S03 egg placeholder. Greyscale oval, not a hatchling. Hidden until .show or .arrive. */
+#egg { opacity: 0; }
+#egg.show { opacity: 1; }
+#egg.arrive { animation: egg-in .6s ease-out forwards; }
+@keyframes egg-in { from { opacity: 0; transform: translateY(-28px); } to { opacity: 1; transform: none; } }
+.egg-shape { fill: #fff; stroke: var(--ink); stroke-width: 2; }
+.egg-label { font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+  #egg.arrive { animation: none; opacity: 1; transform: none; }
+}
+
 .progress-text { margin: 12px 0 4px; font-weight: 700; }
 .bar { height: 10px; border: 1.5px solid var(--ink); background: var(--paper); }
 .bar-fill { height: 100%; background: var(--ink); width: 0; }
@@ -48,7 +59,10 @@ h1 { font-size: 22px; line-height: 1.2; margin: 16px 0 4px; }
 
 .card { margin-top: 16px; border-top: 2px solid var(--ink); padding-top: 16px; }
 .card h2 { font-size: 17px; margin: 0 0 8px; }
+.card h3 { font-size: 14px; margin: 14px 0 6px; }
 .card p { margin: 0 0 12px; }
+.rules { margin: 0 0 12px; padding-left: 18px; }
+.rules li { margin: 0 0 8px; }
 .card .msg { padding: 8px 10px; border-left: 4px solid var(--ink); background: var(--paper); }
 .card .msg.error { border-color: var(--error); color: var(--error); }
 
@@ -77,3 +91,22 @@ body.hide-notes .note { display: none; }
 .jump button { background: #fff; color: var(--ink); text-align: left; font-weight: 400; margin: 0; }
 .jump button[aria-current=step] { background: var(--ink); color: #fff; }
 .jump .group { font-size: 11px; color: var(--mute); margin-top: 6px; }
+
+/* Labeled placeholders for open decisions (share card) and out-of-scope live handoff (S04). */
+.stub-card {
+  border: 2px dashed var(--line);
+  background: var(--paper);
+  padding: 12px;
+  margin: 0 0 12px;
+  text-align: center;
+}
+.stub-card-art {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  padding: 28px 12px;
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--mute);
+}
+.stub-card-line { margin: 0 0 4px; font-size: 13px; color: var(--mute); }

@@ -36,10 +36,15 @@
         </g>
         <!-- Drop marker shows where the newly added stick animates in on S02. -->
         <rect id="stick-drop" x="150" y="60" width="26" height="6" rx="2" class="stick" transform="rotate(-12 163 63)"/>
+        <!-- S03 egg. Hidden until incubation. Oval only: hatchling art stays concealed (R03). -->
+        <g id="egg">
+          <ellipse cx="160" cy="104" rx="26" ry="34" class="egg-shape"/>
+          <text x="160" y="108" text-anchor="middle" class="svg-label egg-label">EGG</text>
+        </g>
         <text x="10" y="20" class="svg-label">NEST ART PLACEHOLDER</text>
         <text x="10" y="34" class="svg-label" id="nest-stage-label">milestone 0 of 5</text>
       </svg>
-      <figcaption class="note">Nest fills visually at milestones (here every 20%). Creature and project details stay hidden in prelaunch.</figcaption>
+      <figcaption class="note" id="nest-caption">Nest fills visually at milestones (here every 20%). Creature and project details stay hidden in prelaunch.</figcaption>
     </figure>
 
     <!-- Text equivalent of the nest for screen readers (spec 05: DOM equivalent for any visual state). -->
@@ -48,7 +53,7 @@
     <p class="note">Count and target are illustrative (843 / 2,000 in the onboarding doc). Threshold still to decide.</p>
 
     <h1 id="headline">Build the nest. Find out what belongs inside.</h1>
-    <p class="note">Candidate copy from PRELAUNCH-ONBOARDING.md. Final wording open.</p>
+    <p class="note" id="headline-note">Candidate copy from PRELAUNCH-ONBOARDING.md. Final wording open.</p>
 
     <!-- Invitation attribution notice. Only shown when the URL carries ?invite=, per J01 step 1. -->
     <p class="invite" id="invite" hidden>Invited by <strong id="invite-code"></strong>. Recorded once you activate.</p>
@@ -60,7 +65,7 @@
   <!-- Reviewer panel. Not part of the product. Lets Aydan and Caelan jump to every alternate state in spec 05. -->
   <aside class="review" aria-label="Reviewer controls">
     <h2>Reviewer panel</h2>
-    <p class="hint">Not product UI. Mock code is <code>WIRE</code>.</p>
+    <p class="hint">Not product UI. Mock code is <code>WIRE</code>. Landing ends at S03.</p>
 
     <fieldset>
       <legend>Jump to state</legend>
@@ -87,6 +92,20 @@
         <select id="mock-phase">
           <option value="open">Collecting sticks</option>
           <option value="complete">Already complete (late signup)</option>
+        </select>
+      </label>
+      <label>After the nest completes
+        <select id="mock-incubation">
+          <option value="scheduled">On schedule</option>
+          <option value="reduced">Reduced motion</option>
+          <option value="delayed">Launch delayed</option>
+          <option value="no-token">No token yet</option>
+        </select>
+      </label>
+      <label>Hatch readiness
+        <select id="mock-readiness">
+          <option value="blocked">Blocked (stay in incubation)</option>
+          <option value="ready">Ready (live S04 not in this wireframe)</option>
         </select>
       </label>
     </fieldset>
